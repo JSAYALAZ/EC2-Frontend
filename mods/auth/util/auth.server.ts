@@ -36,7 +36,7 @@ export async function destroyAuthCookie() {
 const isServer = typeof window === "undefined";
 export function getApiUrl() {
   if (isServer) {
-    return process.env.VITE_API_URL ?? "http://localhost:3000/api";
+    return process.env.API_URL ?? "http://localhost:3000/api";
   }
   return `/api`;
 }
