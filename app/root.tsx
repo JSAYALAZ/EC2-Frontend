@@ -39,9 +39,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   const theme = localStorage.getItem('theme');
                   const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
                   if (theme === 'dark' || (!theme && supportDarkMode)) {
-                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.add('');
                   } else {
-                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.remove('');
                   }
                 } catch (e) {}
               })();

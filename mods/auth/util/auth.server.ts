@@ -33,8 +33,10 @@ export async function destroyAuthCookie() {
     maxAge: 0,
   });
 }
-
+const isServer = typeof window === "undefined";
 export function getApiUrl() {
-  const API_URL = `${process.env.VITE_API_URL ?? "http://localhost:3000"}/api`;
-  return API_URL;
+  if (isServer) {
+    return process.env.VITE_API_URL ?? "http://localhost:3000/api";
+  }
+  return `/api`;
 }
