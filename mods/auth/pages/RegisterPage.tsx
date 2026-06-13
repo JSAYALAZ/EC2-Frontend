@@ -32,8 +32,10 @@ export async function action({ request }: Route.ActionArgs) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
+  console.log("URL: -----------------------");
   console.log(getApiUrl());
   console.log(new URL("/auth/register", getApiUrl()));
+  console.log("URL: -----------------------");
 
   const response = await fetch(new URL("/auth/register", getApiUrl()), {
     method: "POST",
