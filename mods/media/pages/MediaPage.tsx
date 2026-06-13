@@ -150,9 +150,9 @@ export default function MediaPage() {
     if (filterType === "image") return mediaList.filter(item => item.mimeType.startsWith("image/"));
     if (filterType === "video") return mediaList.filter(item => item.mimeType.startsWith("video/"));
     if (filterType === "audio") return mediaList.filter(item => item.mimeType.startsWith("audio/"));
-    return mediaList.filter(item => 
-      !item.mimeType.startsWith("image/") && 
-      !item.mimeType.startsWith("video/") && 
+    return mediaList.filter(item =>
+      !item.mimeType.startsWith("image/") &&
+      !item.mimeType.startsWith("video/") &&
       !item.mimeType.startsWith("audio/")
     );
   }, [mediaList, filterType]);
@@ -266,7 +266,7 @@ export default function MediaPage() {
 
       {/* Main Layout Grid */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden h-[calc(100vh-73px)]">
-        
+
         {/* Left Section: Library and Uploader */}
         <main className="lg:col-span-8 flex flex-col overflow-y-auto p-6 space-y-6">
           {/* Feedback Messages */}
@@ -283,21 +283,20 @@ export default function MediaPage() {
           )}
 
           {/* Upload Area */}
-          <div 
+          <div
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`group border-2 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
-              isSubmitting 
-                ? "border-indigo-500 bg-indigo-500/5 cursor-not-allowed" 
-                : "border-slate-800 bg-slate-950/40 hover:border-indigo-500/60 hover:bg-slate-950/60"
-            }`}
+            className={`group border-2 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all ${isSubmitting
+              ? "border-indigo-500 bg-indigo-500/5 cursor-not-allowed"
+              : "border-slate-800 bg-slate-950/40 hover:border-indigo-500/60 hover:bg-slate-950/60"
+              }`}
           >
-            <input 
-              type="file" 
+            <input
+              type="file"
               ref={fileInputRef}
               onChange={handleFileChange}
-              className="hidden" 
+              className="hidden"
               disabled={isSubmitting}
             />
             {isSubmitting ? (
@@ -326,11 +325,10 @@ export default function MediaPage() {
                 <button
                   key={type}
                   onClick={() => setFilterType(type)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition ${
-                    filterType === type 
-                      ? "bg-indigo-500 text-white shadow-md shadow-indigo-500/15" 
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition ${filterType === type
+                    ? "bg-indigo-500 text-white shadow-md shadow-indigo-500/15"
+                    : "text-slate-400 hover:text-slate-200"
+                    }`}
                 >
                   {type === "all" ? "Todos" : type === "image" ? "Imágenes" : type === "video" ? "Videos" : type === "audio" ? "Audios" : "Otros"}
                 </button>
@@ -352,18 +350,17 @@ export default function MediaPage() {
                 <div
                   key={item.id}
                   onClick={() => handleCardClick(item)}
-                  className={`group relative rounded-2xl overflow-hidden bg-slate-950/40 border transition-all cursor-pointer ${
-                    selectedMedia?.id === item.id 
-                      ? "border-indigo-500 shadow-lg shadow-indigo-500/5" 
-                      : "border-slate-800 hover:border-slate-700 hover:bg-slate-950/60"
-                  }`}
+                  className={`group relative rounded-2xl overflow-hidden bg-slate-950/40 border transition-all cursor-pointer ${selectedMedia?.id === item.id
+                    ? "border-indigo-500 shadow-lg shadow-indigo-500/5"
+                    : "border-slate-800 hover:border-slate-700 hover:bg-slate-950/60"
+                    }`}
                 >
                   {/* Thumbnail / File representation */}
                   <div className="aspect-square w-full bg-slate-950 flex items-center justify-center relative overflow-hidden border-b border-slate-900/50">
                     {item.mimeType.startsWith("image/") ? (
-                      <img 
-                        src={item.url} 
-                        alt={item.originalName} 
+                      <img
+                        src={item.url}
+                        alt={item.originalName}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         loading="lazy"
                       />
@@ -408,7 +405,7 @@ export default function MediaPage() {
         <aside className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-800 bg-slate-950/30 flex flex-col overflow-y-auto">
           {selectedMedia ? (
             <div className="p-6 space-y-6 animate-in slide-in-from-right-4 duration-300">
-              
+
               {/* Header */}
               <div className="flex items-start justify-between">
                 <div>
@@ -428,23 +425,23 @@ export default function MediaPage() {
               {/* Preview Zone */}
               <div className="rounded-2xl overflow-hidden bg-slate-950 border border-slate-800/80 p-2 flex items-center justify-center">
                 {selectedMedia.mimeType.startsWith("image/") ? (
-                  <img 
-                    src={selectedMedia.url} 
-                    alt={selectedMedia.originalName} 
+                  <img
+                    src={selectedMedia.url}
+                    alt={selectedMedia.originalName}
                     className="w-full max-h-60 object-contain rounded-xl"
                   />
                 ) : selectedMedia.mimeType.startsWith("video/") ? (
-                  <video 
-                    src={selectedMedia.url} 
-                    controls 
+                  <video
+                    src={selectedMedia.url}
+                    controls
                     className="w-full rounded-xl max-h-60"
                   />
                 ) : selectedMedia.mimeType.startsWith("audio/") ? (
                   <div className="w-full p-4 flex flex-col items-center space-y-3 bg-slate-900/40 rounded-xl">
                     {getFileIcon(selectedMedia.mimeType)}
-                    <audio 
-                      src={selectedMedia.url} 
-                      controls 
+                    <audio
+                      src={selectedMedia.url}
+                      controls
                       className="w-full mt-2"
                     />
                   </div>
@@ -458,7 +455,7 @@ export default function MediaPage() {
 
               {/* Metadata Details List */}
               <div className="space-y-4">
-                
+
                 {/* ID */}
                 <div className="p-3 bg-slate-900/40 rounded-xl border border-slate-800/60">
                   <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">ID del Recurso</span>

@@ -4,7 +4,7 @@ export const authCookie = createCookie("auth_token", {
   httpOnly: true,
   sameSite: "lax",
   path: "/",
-  secure: process.env.NODE_ENV === "production",
+  secure: false,
   maxAge: 60 * 60 * 24, // 1 día
 });
 
